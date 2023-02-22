@@ -25,7 +25,17 @@ func TestInsertContact(t *testing.T) {
 	}
 	fmt.Println(result)
 }
-
+func TestDeleteContact(t *testing.T) {
+	contactRepository := NewContactRepository(data.GetConnection())
+	ctx := context.Background()
+	contact := entity.Contact {
+		Id: 8,
+	}
+	err := contactRepository.DeleteContact(ctx,contact.Id)
+	if err != nil {
+		panic(err)
+	}	
+}
 func TestGetContacts(t *testing.T) {
 	contactRepository := NewContactRepository(data.GetConnection())
 	contacts,err := contactRepository.GetContacts(context.Background())
