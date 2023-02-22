@@ -46,3 +46,20 @@ func TestGetContacts(t *testing.T) {
 		fmt.Println(contact)
 	}
 }
+
+func TestUpdateContacts(t *testing.T) {
+	contactRepository := NewContactRepository(data.GetConnection())
+	contact := entity.Contact {
+		FirstName: "abu",
+		LastName: "bakar",
+		PhoneNumber: "1212121",
+		Email: "abu.bakar@example.com",
+		Id: 10,
+
+	}
+	result,err := contactRepository.UpdateContact(context.Background(),contact)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(result)
+}

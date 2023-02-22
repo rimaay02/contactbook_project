@@ -54,3 +54,11 @@ func (repository *contactRepositoryImpl) DeleteContact(ctx context.Context, id i
 	}
 	return nil	
 }
+func (repository *contactRepositoryImpl) UpdateContact(ctx context.Context,contact entity.Contact) (entity.Contact, error) {
+	script := "UPDATE contact SET first_name = ? , last_name = ? , phone_number = ? , email = ? WHERE Id = ?;"
+	_, err := repository.DB.ExecContext(ctx, script, contact.FirstName, contact.LastName, contact.PhoneNumber, contact.Email,contact.Id)
+	if err != nil {
+		return contact,err
+	}
+	return contact,nil	
+}

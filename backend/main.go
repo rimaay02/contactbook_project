@@ -45,6 +45,18 @@ func deleteContact(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
+func updateContact(ctx *gin.Context) {
+	var updatedContact entity.Contact
+	if err := ctx.BindJSON(&updatedContact); err != nil {
+		return
+	}
+	_, err := contactRepository.UpdateContact(context.Background(), updatedContact)
+	if err != nil {
+		panic(err)
+	}
+	ctx.IndentedJSON(http.StatusCreated, updatedContact)
+}
+
 func main() {
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
@@ -55,6 +67,7 @@ func main() {
 	router.GET("/", getContacts)
 	router.POST("/contacts", insertContact)
 	router.DELETE("/deleteContact", deleteContact)
+	router.PUT("/updateContact", updateContact)
 	router.Run("0.0.0.0:8080")
 
 }
