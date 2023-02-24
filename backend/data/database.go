@@ -6,7 +6,7 @@ import (
 )
 
 func GetConnection() *sql.DB {
-	db, err := sql.Open("mysql", "root:1234@tcp(localhost:3306)/contactbook_database")
+	db, err := sql.Open("mysql", "root:1234@tcp(127.0.0.1:3307)/contact_database")
 	if err != nil {
 		panic(err)
 	}
