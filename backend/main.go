@@ -69,5 +69,4 @@ func main() {
 	router.DELETE("/deleteContact", deleteContact)
 	router.PUT("/updateContact", updateContact)
 	router.Run("0.0.0.0:8080")
-
 }
